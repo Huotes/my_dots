@@ -1,163 +1,109 @@
-/*
-* * * * * * * * * * * * * * * * * * * * * * * * *
-* Author: Eduardo de Sá Coêlho Ribeiro Costa   	*
-* Github: https://github.com/edudscrc           *
-*											   	*
-* Rofi Version: 1.7.9.1-dirty					*
-* * * * * * * * * * * * * * * * * * * * * * * * *
-*/
-
-/*-----Configuration-----*/
-
 configuration {
-	modes: "drun";
-	font: "Monaspace Neon Frozen 12";
-	drun-display-format: "{name}";
+  modi: "run,drun,window";
+  lines: 8;
+  cycle: false;
+  font: "JetbrainsMono Nerd Font Bold 10";
+  show-icons: true;
+  terminal: "ghostty";
+  drun-display-format: "{icon} {name}";
+  location: 0;
+  disable-history: true;
+  hide-scrollbar: true;
+  display-drun: " Apps ";
+  display-run: " Run ";
+  display-window: " Window ";
+  sidebar-mode: true;
+  sorting-method: "fzf";
 }
 
-/*-----Global-----*/
+@theme "theme"
 
-* {
-	color0: #282828;
-	color2: #98971a;
-	color3: #504945;
-	color4: #458588;
-	color5: #ebdbb2;
-	color8: #32302f;
-	color9: #3c3836;
-
-	fg-highlight: @color4;
-
-	bg-entry: @color9;
-	fg-entry: @color4;
-	fg-placeholder: #ebdbb250;
-
-	bg-listview: @color0;
-	fg-element: @color5;
-
-	bg-element-selected: @color8;
-	fg-element-selected: @color2;
-	border-color-element-selected: @color3;
-
-	bg-inputbar: @color0;
-
-	border-color: @color3;
-
-	// border-radius
-    br: 2px;
-
-	border-size-window: 2px;
-	border-size-element-selected: 2px;
-
-	spacing: 0;
+element-text, element-icon , mode-switcher {
+  background-color: inherit;
+  text-color:       inherit;
 }
-
-/*-----Main Window-----*/
 
 window {
-	transparency: "real";
-	background-color: transparent;
-
-	padding: 0;
-
-	children: [mainbox];
-
-	border: @border-size-window;
-	border-color: @border-color;
-
-	border-radius: @br;
-
-	width: 20%;
+  border-radius: 12px;
+  height: 400px;
+  width: 600px;
+  border: 2px;
+  border-color: @green;
+  background-color: @bg-col;
 }
-
-/*-----Main Box-----*/
 
 mainbox {
-    children: [inputbar, listview];
-    orientation: vertical;
+  background-color: @bg-col;
 }
 
-/*-----Input Bar-----*/
-
 inputbar {
-	children: [entry];
+  children: [prompt,entry];
+  background-color: @bg-col-light;
+  border-radius: 5px;
+  padding: 0px;
+}
 
-	background-color: @bg-inputbar;
+prompt {
+  background-color: @green;
+  padding: 4px;
+  text-color: @bg-col-light;
+  border-radius: 3px;
+  margin: 10px 0px 10px 10px;
+}
+
+textbox-prompt-colon {
+  expand: false;
+  str: ":";
 }
 
 entry {
-	color: @fg-entry;
-	placeholder-color: @fg-placeholder;
-	background-color: @bg-entry;
-
-	placeholder: "Cracking crème brûlée";
-
-	text-transform: bold;
-
-	border-radius: @br;
-
-	padding: 12px;
-	margin: 10px;
-
-	vertical-align: 0.5;
-
-	border: 0;
+  padding: 6px;
+  margin: 10px 10px 10px 5px;
+  text-color: @fg-col;
+  background-color: @bg-col;
+  border-radius: 3px;
 }
 
-/*-----List View-----*/
-
 listview {
-	scrollbar: false;
-
-	// border: 0 0 0 2px;  // Removes the dashed line
-	border: 0;
-	lines: 8;   // 8 elements "per page"
-
-	background-color: @bg-listview;
-
-	padding: 10px;
+  border: 0px 0px 0px;
+  padding: 6px 0px 0px;
+  margin: 10px 0px 0px 6px;
+  columns: 1;
+  background-color: @bg-col;
+  cycle: true;
 }
 
 element {
-	children: [element-icon, element-text];
-	spacing: 10px;
-
-	border-radius: @br;
+  padding: 8px;
+  margin: 0px 10px 4px 4px;
+  background-color: @bg-col;
+  text-color: @fg-col;
 }
 
 element-icon {
-	vertical-aling: 0.5;
-
-	margin: 0 0 0 10px;
+  size: 28px;
 }
 
-element-text {
-	vertical-align: 0.5;
-	text-transform: bold;
-
-	border-radius: @br;
-
-	color: @fg-element;
-	highlight: @fg-highlight;
-
-	padding: 5px;
-	margin: 10px 10px 10px 0;
+element selected {
+  background-color:  @selected-col ;
+  text-color: @fg-col2  ;
+  border-radius: 3px;
 }
 
-element selected.normal {
-	// background-color: @bg-listview;
-	background-color: @bg-element-selected;
-
-	border: @border-size-element-selected;
-	border-color: @border-color-element-selected;
+mode-switcher {
+  spacing: 0;
 }
 
-element-text selected {
-	color: @fg-element-selected;
-	text-transform: bold;
+button {
+  padding: 10px;
+  background-color: @bg-col-light;
+  text-color: @grey;
+  vertical-align: 0.5;
+  horizontal-align: 0.5;
 }
 
-element normal.normal,
-element alternate.normal {
-	background-color: transparent;
+button selected {
+  background-color: @bg-col;
+  text-color: @green;
 }
+
